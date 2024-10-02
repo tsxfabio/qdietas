@@ -1,0 +1,27 @@
+{
+  "name": "qdietas",
+  "version": "1.0.0",
+  "description": "### Objetivo Este projeto tem como objetivo o desenvolvimento e aperfeiçoamento de habilidades técnicas, com foco na criação do backend do aplicativo Qdietas. O objetivo é construir uma API robusta e escalável que suporte as funcionalidades essenciais do sistema de gerenciamento de dietas.",
+  "main": "index.js",
+  "scripts": {
+    "qdietas:dev": "tsx watch src/server.ts",
+    "qdietas": "node build/server.js",
+    "qdietas:build": "tsup src --out-dir build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
+    "@types/node": "22.7.4",
+    "eslint": "8.57.1",
+    "tsup": "8.3.0",
+    "tsx": "4.19.1",
+    "typescript": "5.6.2"
+  },
+  "dependencies": {
+    "dotenv": "16.4.5",
+    "fastify": "5.0.0",
+    "zod": "3.23.8"
+  }
+}
