@@ -12,3 +12,42 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Auth {
+  id            String @id @default(uuid())
+  email         String @unique
+  password_hash String
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String @unique
+
+  @@map("auth")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  birth_date DateTime
+  weight     Float?
+  height     Float?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  Meal Meal[]
+  Auth Auth?
+
+  @@map("users")
+}
+
+model Meal {
+  id               Int      @id @default(autoincrement())
+  meal_name        String
+  meal_description String?
+  meal_datetime    DateTime
+  within_diet      Boolean
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  @@map("meals")
+}
