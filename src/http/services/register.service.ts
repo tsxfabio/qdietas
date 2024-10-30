@@ -1,48 +1,32 @@
-import { prisma } from '../../lib/prisma'
+
+import { hash } from "bcryptjs"
+import { UsersRepository } from "../repositories/users-repository"
 
 type RegisterUserProps = {
   email: string
-  password_hash: string
+  password: string
   name: string
   birthDate: string
 }
 
-export const RegisterUser = async ({
-  email,
-  password_hash,
-  name,
-  birthDate,
-}: RegisterUserProps) => {
-  try {
-    await prisma.$transaction(async (prisma) => {
-      // Criar o usuário na tabela `User`
-      const user = await prisma.user.create({
-        data: {
-          name,
-          birth_date: new Date(birthDate),
-        },
-      })
+export class RegisterUserService {
+  constructor(private usersRepository: UsersRepository) {}
 
-      // Criar o auth vinculado ao usuário
-      await prisma.auth.create({
-        data: {
-          email,
-          password_hash,
-          user: {
-            connect: {
-              id: user.id,
-            },
-          },
-        },
-      })
+  async execute({ email, password, name, birthDate }: RegisterUserProps) {
+    const password_hash = await hash(password, 6)
+    const userWithSameEmail = await this.usersRepository.findByEmail(email)
+
+    if (userWithSameEmail) {
+      throw new Error('Email already in use')
+    }
+
+    const data = await this.usersRepository.create({
+      email,
+      password_hash,
+      name,
+      birthDate,
     })
 
-    return {
-      message: 'Usuário criado com sucesso',
-    }
-  } catch (error) {
-    throw new Error('Erro ao criar o usuário e o auth')
-  } finally {
-    prisma.$disconnect()
+    return data
   }
 }
