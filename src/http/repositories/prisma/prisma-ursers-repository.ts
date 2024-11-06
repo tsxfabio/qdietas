@@ -12,6 +12,16 @@ export class PrismaUsersRepository implements UsersRepository {
     return auth
   }
 
+  async findUser(user_id: string) {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: user_id
+      }
+    })
+
+    return user
+  }
+
   async create(data: CreateUserRepositoryProps) {
     try {
       await prisma.$transaction(async (prisma) => {

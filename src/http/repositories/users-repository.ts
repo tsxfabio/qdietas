@@ -9,6 +9,7 @@ export interface CreateUserRepositoryProps {
 
 export interface UsersRepository {
     findByEmail(email: string): Promise<Auth | null>
+    findUser(user_id: string): Promise<User | null>
     create(data: CreateUserRepositoryProps): Promise<any>
 
 }

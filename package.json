@@ -6,7 +6,8 @@
   "scripts": {
     "qdietas:dev": "tsx watch src/server.ts",
     "qdietas": "node build/server.js",
-    "qdietas:build": "tsup src --out-dir build"
+    "qdietas:build": "tsup src --out-dir build",
+    "test": "vitest run"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,8 @@
     "prisma": "5.20.0",
     "tsup": "8.3.0",
     "tsx": "4.19.1",
-    "typescript": "5.6.2"
+    "typescript": "5.6.2",
+    "vitest": "2.1.4"
   },
   "dependencies": {
     "@prisma/client": "5.20.0",

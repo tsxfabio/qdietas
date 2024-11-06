@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { hash } from 'bcryptjs'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { RegisterUserService } from '../services/register.service'
 import { PrismaUsersRepository } from '../repositories/prisma/prisma-ursers-repository'
@@ -15,7 +14,7 @@ export const register = async (
     }),
     email: z.string().email(),
     password: z.string().min(6),
-  })
+  }) 
 
   const { name, birthDate, email, password } = registerBodySchema.parse(
     request.body,
