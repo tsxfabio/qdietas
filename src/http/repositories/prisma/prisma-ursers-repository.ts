@@ -6,17 +6,17 @@ export class PrismaUsersRepository implements UsersRepository {
     const auth = await prisma.auth.findUnique({
       where: {
         email,
-      }
+      },
     })
 
     return auth
   }
 
-  async findUser(user_id: string) {
+  async findById(user_id: string) {
     const user = await prisma.user.findUnique({
       where: {
-        id: user_id
-      }
+        id: user_id,
+      },
     })
 
     return user
@@ -54,5 +54,4 @@ export class PrismaUsersRepository implements UsersRepository {
       throw new Error('Erro ao criar o usuário')
     }
   }
-
 }

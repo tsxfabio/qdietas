@@ -1,6 +1,5 @@
-
-import { hash } from "bcryptjs"
-import { UsersRepository } from "../repositories/users-repository"
+import { hash } from 'bcryptjs'
+import { UsersRepository } from '../repositories/users-repository'
 
 type RegisterUserProps = {
   email: string

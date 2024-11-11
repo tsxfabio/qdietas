@@ -1,15 +1,14 @@
-import { Auth, User } from "@prisma/client"
+import { Auth, User } from '@prisma/client'
 
 export interface CreateUserRepositoryProps {
-    email: string
-    password_hash: string
-    name: string
-    birthDate: string | Date
-  }
+  email: string
+  password_hash: string
+  name: string
+  birthDate: string | Date
+}
 
 export interface UsersRepository {
-    findByEmail(email: string): Promise<Auth | null>
-    findUser(user_id: string): Promise<User | null>
-    create(data: CreateUserRepositoryProps): Promise<any>
-
+  findByEmail(email: string): Promise<Auth | null>
+  findById(id: string): Promise<User | null>
+  create(data: CreateUserRepositoryProps): Promise<any>
 }
